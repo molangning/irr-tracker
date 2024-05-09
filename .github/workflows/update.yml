@@ -2,7 +2,7 @@ name: IRR updater
 
 on:
   schedule:
-  - cron: */5 * * * *
+  - cron: '*/5 * * * *'
   
   workflow_dispatch:
 
