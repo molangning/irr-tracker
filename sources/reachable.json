@@ -1,0 +1,87 @@
+{
+    "AFRINIC": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "ALTDB": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "APNIC": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "ARIN": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "BELL": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "BBOI": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "CANARIE": {
+        "https_reachable": true,
+        "ftp_reachable": false,
+        "irr_db_available": true
+    },
+    "IDNIC": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "JPIRR": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "LACNIC": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "LEVEL3": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "NESTEGG": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "NTTCOM": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "PANIX": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "RADB": {
+        "https_reachable": false,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "RIPE": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    },
+    "TC": {
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
+    }
+}
