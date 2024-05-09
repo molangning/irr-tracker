@@ -37,6 +37,8 @@ def mirror_ftp(host, currentserial_file, name):
         dirlist = BytesIO()
         base_path = None
 
+        print(f'[+] Trying to mirror {name} through ftp')
+
         makedir_if_not_exists(os.path.join(DB_OUTPUT, name))
 
         if "/" in currentserial_file:
@@ -88,6 +90,8 @@ def mirror_ftp(host, currentserial_file, name):
 def mirror_https(host, currentserial_file, name):
     base_path = ""
     serial_number = ""
+
+    print(f'[+] Trying to mirror {name} through https')
 
     makedir_if_not_exists(os.path.join(DB_OUTPUT, name))
 
