@@ -3,7 +3,7 @@
 import ftplib
 import json
 import os
-from io import StringIO, BytesIO
+from io import BytesIO
 
 from lib import check_port, wrapped_requests, extract_serial, parse_ftp_list, parse_http_list, download_file
 
@@ -18,11 +18,20 @@ RESOLVED_REACHABLE_FILE = os.path.join(BASE_PATH, REACHABLE_FILE)
 SERIAL_FILE = "serial-numbers.json"
 RESOLVED_SERIAL_FILE = os.path.join(BASE_PATH, SERIAL_FILE)
 
+EXCLUDE_FILE = "exclude.json"
+RESOLVED_EXCLUDE_FILE = os.path.join(BASE_PATH, EXCLUDE_FILE)
+
 DB_OUTPUT = os.path.join(BASE_PATH, "dbs")
 
 reachable = json.load(open(RESOLVED_REACHABLE_FILE))
 sources = json.load(open(RESOLVED_SOURCES_FILE))
 serial_numbers = json.load(open(RESOLVED_SERIAL_FILE))
+
+exclude = []
+
+if "USE_EXCLUDE" in os.environ:
+    print("[!] Using excludes")
+    exclude = json.load(open(RESOLVED_EXCLUDE_FILE))
 
 servers = []
 
@@ -36,8 +45,6 @@ def mirror_ftp(host, currentserial_file, name):
         serial_number = BytesIO()
         dirlist = BytesIO()
         base_path = None
-
-        print(f'[+] Trying to mirror {name} through ftp')
 
         makedir_if_not_exists(os.path.join(DB_OUTPUT, name))
 
@@ -91,8 +98,6 @@ def mirror_https(host, currentserial_file, name):
     base_path = ""
     serial_number = ""
 
-    print(f'[+] Trying to mirror {name} through https')
-
     makedir_if_not_exists(os.path.join(DB_OUTPUT, name))
 
     if "/" in currentserial_file:
@@ -140,6 +145,7 @@ def mirror_https(host, currentserial_file, name):
 for source in sources:
     server = []
     name = source['name']
+    mirrored = False
 
     if not source["ftp_site"]:
         print(f"[!] Skipping registry {name} as no ftp sites defined.")
@@ -148,13 +154,29 @@ for source in sources:
     hostname = source["ftp_site"][0].split("://", 1)[-1].split("/", 1)[0]
     serialnumber_file = extract_serial(source["ftp_site"], name)
 
-    if check_port(hostname, 443) and mirror_https(hostname, serialnumber_file, name):
-        print(f'[+] Mirrored {name} through https')
+    if name in exclude:
+        print(f"[!] Skipping {name} as it is in excludes")
+        continue
+
+    if check_port(hostname, 443):
+        print(f'[+] Trying to mirror {name} through https')
+
+        if mirror_https(hostname, serialnumber_file, name) is True:
+            mirrored = True
+            print(f'[+] Finished mirroring {name} through https')
+        else:
+            print(f'[+] Failed to mirror {name} through https')
     
-    elif check_port(hostname, 21) and mirror_ftp(hostname, serialnumber_file, name):
-        print(f'[+] Mirrored {name} through ftp')
-    
-    else:
+    if mirrored is False and check_port(hostname, 21):
+        print(f'[+] Trying to mirror {name} through ftp')
+
+        if mirror_ftp(hostname, serialnumber_file, name) is True:
+            mirrored = True
+            print(f'[+] Finished mirroring {name} through ftp')
+        else:
+            print(f'[+] Failed to mirror {name} through ftp')
+
+    if mirrored is False:
         print(f'[!] Unable to mirror with {name}')
         continue
 
