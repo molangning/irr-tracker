@@ -1,4 +1,4 @@
-name: Data updater every 30 minutes
+name: IRR updater
 
 on:
   schedule:
