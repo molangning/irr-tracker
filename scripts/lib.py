@@ -17,7 +17,7 @@ DATE_WITH_MONTH = "%d-%b-%Y %H:%M"
 def wrapped_requests(url, headers={}, json=False):
     for i in range(1,4):
         try:
-            r = requests.get(url,headers=headers)
+            r = requests.get(url,headers=headers, timeout=60)
     
             if r.status_code==200:
                 # print("[+] Got %s successfully!"%(url))
@@ -48,7 +48,7 @@ def wrapped_requests(url, headers={}, json=False):
 def download_file(url, fp, headers={}):
     for i in range(1,4):
         try:
-            r = requests.get(url,headers=headers, stream=True)
+            r = requests.get(url,headers=headers, stream=True, timeout=60)
     
             if r.status_code==200:
                 break
