@@ -6,8 +6,8 @@ import json
 
 print("[+] Readme updater")
 
-CHECK_MARK_EMOJI=":white_check_mark:"
-CROSS_MARK_EMOJI=":negative_squared_cross_mark:"
+CHECK_MARK_EMOJI=":heavy_check_mark:"
+CROSS_MARK_EMOJI=":x:"
 DETAILS_ANCHOR="<!--- details anchor -->"
 DETAILS_ANCHOR_REGEX=r"%s.*?%s"%(DETAILS_ANCHOR,DETAILS_ANCHOR)
 DETAILS_TABLE_HEADER="""
