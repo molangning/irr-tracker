@@ -6,4 +6,4 @@ export PYTHONUNBUFFERED=1
 ./scripts/pull-sources.py
 ./scripts/test-dbs.py
 ./scripts/update-readme.py
-./scripts/mirror-dbs.py
+USE_EXCLUDE=1 ./scripts/mirror-dbs.py
