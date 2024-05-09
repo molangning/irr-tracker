@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+
+import ftplib
+import json
+import os
+from io import StringIO, BytesIO
+
+from lib import check_port, wrapped_requests, extract_serial, parse_ftp_list, parse_http_list, download_file
+
+BASE_PATH = "sources/"
+
+SOURCE_FILE = "registry-list.json"
+RESOLVED_SOURCES_FILE = os.path.join(BASE_PATH, SOURCE_FILE)
+
+REACHABLE_FILE = "reachable.json"
+RESOLVED_REACHABLE_FILE = os.path.join(BASE_PATH, REACHABLE_FILE)
+
+SERIAL_FILE = "serial-numbers.json"
+RESOLVED_SERIAL_FILE = os.path.join(BASE_PATH, SERIAL_FILE)
+
+DB_OUTPUT = os.path.join(BASE_PATH, "dbs")
+
+reachable = json.load(open(RESOLVED_REACHABLE_FILE))
+sources = json.load(open(RESOLVED_SOURCES_FILE))
+serial_numbers = json.load(open(RESOLVED_SERIAL_FILE))
+
+servers = []
+
+def makedir_if_not_exists(path):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+
+def mirror_ftp(host, currentserial_file, name):
+    
+    try:
+        serial_number = BytesIO()
+        dirlist = BytesIO()
+        base_path = None
+
+        makedir_if_not_exists(os.path.join(DB_OUTPUT, name))
+
+        if "/" in currentserial_file:
+            base_path, currentserial_file = currentserial_file.rsplit("/", 1)
+
+        ftp = ftplib.FTP(host, timeout=30)
+        ftp.login()
+
+        if base_path is not None:
+            ftp.cwd(base_path)
+
+        ftp.retrbinary("LIST", dirlist.write)
+        dirlist = dirlist.getvalue()
+        filelist = parse_ftp_list(dirlist, name)
+
+        ftp.retrbinary(f'RETR {currentserial_file}', serial_number.write)
+        serial_number = serial_number.getvalue().decode().strip()
+
+        if name in serial_numbers.keys() and serial_numbers[name] == serial_number:
+            print(f"[+] Skipping {name} as serial number matches")
+            return True
+
+        for entry in filelist["source_files"]:
+
+            filename = entry[0]
+
+            if filename.lower().endswith("currentserial"):
+                continue
+
+            print(f"[+] Downloading {filename} from {host} using ftp")
+
+            f = open(os.path.join(DB_OUTPUT, name, filename), "wb")
+            ftp.retrbinary(f'RETR {filename}', f.write)
+            f.close()
+
+            print(f"[+] Downloaded {filename} from {host} using ftp")
+
+            serial_numbers[name] = serial_number
+
+        return True
+
+    except ConnectionError:
+        print(f"[!] Connection error while getting from {host}")
+
+    except Exception as e:
+        print(f"[!] Error while getting from {host}")
+        print(f"[!] {e}")
+
+def mirror_https(host, currentserial_file, name):
+    base_path = ""
+    serial_number = ""
+
+    makedir_if_not_exists(os.path.join(DB_OUTPUT, name))
+
+    if "/" in currentserial_file:
+        base_path, currentserial_file = currentserial_file.rsplit("/", 1)
+
+    url = f"https://{host}/{base_path}"
+    
+    serial_number = wrapped_requests(f"{url}/{currentserial_file}")
+
+    if serial_number is None:
+        return False
+    
+    serial_number = serial_number.strip()
+
+    if name in serial_numbers.keys() and serial_numbers[name] == serial_number:
+        print(f"[+] Skipping {name} as serial number matches")
+        return True
+    
+    html = wrapped_requests(url)
+
+    if html is None:
+        return False
+    
+    filelist = parse_http_list(html, name)
+
+    for entry in filelist["source_files"]:
+
+        filename = entry[0]
+
+        if filename.lower().endswith("currentserial"):
+            continue
+
+        print(f"[+] Downloading {filename} from {host} using https")
+
+        f = open(os.path.join(DB_OUTPUT, name, filename), "wb")
+        download_file(f"{url}/{filename}", f)
+        f.close()
+
+        print(f"[+] Downloaded {filename} from {host} using https")
+
+        serial_numbers[name] = serial_number
+
+    return True
+
+for source in sources:
+    server = []
+    name = source['name']
+
+    if not source["ftp_site"]:
+        print(f"[!] Skipping registry {name} as no ftp sites defined.")
+        continue
+
+    hostname = source["ftp_site"][0].split("://", 1)[-1].split("/", 1)[0]
+    serialnumber_file = extract_serial(source["ftp_site"], name)
+
+    if check_port(hostname, 443) and mirror_https(hostname, serialnumber_file, name):
+        print(f'[+] Mirrored {name} through https')
+    
+    elif check_port(hostname, 21) and mirror_ftp(hostname, serialnumber_file, name):
+        print(f'[+] Mirrored {name} through ftp')
+    
+    else:
+        print(f'[!] Unable to mirror with {name}')
+        continue
+
+    json.dump(serial_numbers, open(RESOLVED_SERIAL_FILE, "w"), indent=4)
+
+    
+
+    
