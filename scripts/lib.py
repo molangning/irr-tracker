@@ -51,7 +51,6 @@ def download_file(url, fp, headers={}):
             r = requests.get(url,headers=headers, stream=True)
     
             if r.status_code==200:
-                # print("[+] Got %s successfully!"%(url))
                 break
     
             if i==3:
@@ -60,17 +59,17 @@ def download_file(url, fp, headers={}):
     
             print("[!] Getting %s failed(%i/3)"%(url,i))
 
-            for chunk in r.iter_content(chunk_size=4096):
-                fp.write(chunk)
-
-            return True
-
         except requests.exceptions.SSLError:
             return False
         
         except Exception as e:
             print(f"[!] Got exception {e}")
             return False
+
+    for chunk in r.iter_content(chunk_size=4096):
+        fp.write(chunk)
+
+    return True
     
 def check_port(host, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
