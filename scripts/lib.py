@@ -29,6 +29,9 @@ def wrapped_requests(url, headers={}, json=False):
     
             print("[!] Getting %s failed(%i/3)"%(url,i))
 
+        except requests.exceptions.Timeout:
+            print("[!] Timed out getting %s (%i/3)"%(url,i))
+
         except requests.exceptions.SSLError:
             return None
         
@@ -48,16 +51,23 @@ def wrapped_requests(url, headers={}, json=False):
 def download_file(url, fp, headers={}):
     for i in range(1,4):
         try:
-            r = requests.get(url,headers=headers, stream=True, timeout=60)
+            r = requests.get(url, headers=headers, stream=True, timeout=60)
     
-            if r.status_code==200:
-                break
+            if r.status_code!=200:
+                print("[!] Getting %s failed(%i/3)"%(url,i))
+                continue
     
             if i==3:
                 print("[!] Failed to get %s."%(url))
                 exit(2)
-    
-            print("[!] Getting %s failed(%i/3)"%(url,i))
+
+            for chunk in r.iter_content(chunk_size=4096):
+                fp.write(chunk)
+
+            return True
+
+        except requests.exceptions.Timeout:
+            print("[!] Timed out getting %s (%i/3)"%(url,i))
 
         except requests.exceptions.SSLError:
             return False
@@ -65,12 +75,7 @@ def download_file(url, fp, headers={}):
         except Exception as e:
             print(f"[!] Got exception {e}")
             return False
-
-    for chunk in r.iter_content(chunk_size=4096):
-        fp.write(chunk)
-
-    return True
-    
+            
 def check_port(host, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(10)
