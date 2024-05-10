@@ -21,12 +21,12 @@ jobs:
         run: |
           git add -N .
 
-          if [ -z "$(git ls-files --modified sources/)" ]; then
+          if [ -z "$(git ls-files --modified sources/ README.md)" ]; then
               echo "[+] No files were changed"
           else
               echo "[+] Files were changed! Pushing changed..."
               git pull
-              git stage sources/
+              git stage sources/ README.md
               git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
               git config --local user.email "example@github.com"
               git config --local user.name "GitHub Action"
