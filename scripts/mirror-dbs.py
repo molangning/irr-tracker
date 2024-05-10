@@ -5,7 +5,7 @@ import json
 import os
 from io import BytesIO
 
-from lib import check_port, wrapped_requests, extract_serial, parse_ftp_list, parse_http_list, download_file
+from lib import wrapped_requests, extract_serial, parse_ftp_list, parse_http_list, download_file
 
 BASE_PATH = "sources/"
 
@@ -158,7 +158,7 @@ for source in sources:
         print(f"[!] Skipping {name} as it is in excludes")
         continue
 
-    if check_port(hostname, 443):
+    if reachable[name]["https_reachable"] is True:
         print(f'[+] Trying to mirror {name} through https')
 
         if mirror_https(hostname, serialnumber_file, name) is True:
@@ -167,7 +167,7 @@ for source in sources:
         else:
             print(f'[+] Failed to mirror {name} through https')
     
-    if mirrored is False and check_port(hostname, 21):
+    if mirrored is False and reachable[name]["https_reachable"] is True:
         print(f'[+] Trying to mirror {name} through ftp')
 
         if mirror_ftp(hostname, serialnumber_file, name) is True:
