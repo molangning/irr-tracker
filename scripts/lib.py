@@ -3,6 +3,8 @@
 from datetime import datetime
 from decimal import Decimal
 
+import gzip
+import os
 import re
 import requests
 import socket
@@ -211,3 +213,22 @@ def parse_http_list(dirlist, name):
             filelist["mirrored_files"].append([filename, entry[1], entry[2]])
 
     return filelist
+
+def test_gz(db_name):
+    dbs = []
+    root_dir = os.path.join("sources", "dbs", db_name)
+    for i in os.listdir(root_dir):
+        if i.endswith(".gz"):
+            dbs.append(os.path.join(root_dir, i))
+
+    lines = 0
+
+    for i in dbs:
+        with gzip.open(i, 'rb') as f:
+            try:
+                for _ in f:
+                    lines += 1
+                return lines
+            except (gzip.BadGzipFile, EOFError):
+                print(f"[!] Failed to read {i})")
+                return False

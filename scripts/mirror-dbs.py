@@ -3,9 +3,10 @@
 import ftplib
 import json
 import os
-from io import BytesIO
+import time
 
-from lib import wrapped_requests, extract_serial, parse_ftp_list, parse_http_list, download_file
+from io import BytesIO
+from lib import wrapped_requests, extract_serial, parse_ftp_list, parse_http_list, download_file, test_gz
 
 BASE_PATH = "sources/"
 
@@ -161,20 +162,40 @@ for source in sources:
     if reachable[name]["https_reachable"] is True:
         print(f'[+] Trying to mirror {name} through https')
 
-        if mirror_https(hostname, serialnumber_file, name) is True:
-            mirrored = True
-            print(f'[+] Finished mirroring {name} through https')
-        else:
-            print(f'[+] Failed to mirror {name} through https')
+        for i in range(1, 4):
+            downloaded = mirror_https(hostname, serialnumber_file, name)
+            valid = test_gz(name)
+
+            if downloaded is True:
+                if valid is not False:
+                    mirrored = True
+                    print(f'[+] Finished mirroring {name} through https')
+                    break
+                else:
+                    print(f"[!] Mirrored {name} through https but downloaded files are invalid ({i}/3)")
+            else:
+                print(f'[+] Failed to mirror {name} through https ({i}/3)')
     
-    if mirrored is False and reachable[name]["https_reachable"] is True:
+            time.sleep(5)
+
+    if mirrored is False and reachable[name]["ftp_reachable"] is True:
         print(f'[+] Trying to mirror {name} through ftp')
 
-        if mirror_ftp(hostname, serialnumber_file, name) is True:
-            mirrored = True
-            print(f'[+] Finished mirroring {name} through ftp')
-        else:
-            print(f'[+] Failed to mirror {name} through ftp')
+        for i in range(1, 4):
+            downloaded = mirror_ftp(hostname, serialnumber_file, name)
+            valid = test_gz(name)
+
+            if downloaded is True:
+                if valid is not False:
+                    mirrored = True
+                    print(f'[+] Finished mirroring {name} through ftp')
+                    break
+                else:
+                    print(f"[!] Mirrored {name} through ftp but downloaded files are invalid ({i}/3)")
+            else:
+                print(f'[+] Failed to mirror {name} through ftp ({i}/3)')
+
+            time.sleep(5)
 
     if mirrored is False:
         print(f'[!] Unable to mirror with {name}')
