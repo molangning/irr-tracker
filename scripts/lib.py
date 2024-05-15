@@ -232,3 +232,25 @@ def test_gz(db_name):
             except (gzip.BadGzipFile, EOFError):
                 print(f"[!] Failed to read {i})")
                 return False
+            
+def parse_whois_entries(raw_entries):
+    entries = {}
+
+    for line in raw_entries:
+        if line[0:1] == b" ":
+            entries[decoded_header] += line.lstrip()
+            continue
+
+        try:
+            header, value = line.split(b":", 1)
+        except ValueError:
+            continue
+
+        decoded_header = header.decode()
+
+        if not decoded_header in entries.keys():
+            entries[decoded_header] = value.strip()
+        else:
+            entries[decoded_header] += value.lstrip()
+
+    return entries
