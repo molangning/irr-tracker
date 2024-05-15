@@ -77,25 +77,23 @@ for source in sources:
 
     if check_port(hostname, 443):
         https_reachable = test_https(hostname, serialnumber_file, name)
-
-        if https_reachable is False:
-            print(f"[!] Unable to get https listing from {name}.")
-        else:
-            print(f'[+] {name} is available through https port, excellent.')
-    
     else:
         print(f'[!] {name} is NOT reachable through https port.')
     
+    if https_reachable is False:
+        print(f"[!] Unable to get https listing from {name}.")
+    else:
+        print(f'[+] {name} is available through https port, excellent.')
+
     if check_port(hostname, 21):
         ftp_reachable = test_ftp(hostname, serialnumber_file, name)
-        
-        if ftp_reachable is False:
-            print(f"[!] Unable to get ftp listing from {name}.")
-        else:
-            print(f'[+] {name} is available through ftp port, excellent.')
-
     else:
         print(f'[!] {name} is NOT reachable through ftp port.')
+
+    if ftp_reachable is False:
+        print(f"[!] Unable to get ftp listing from {name}.")
+    else:
+        print(f'[+] {name} is available through ftp port, excellent.')
 
     if https_reachable is not True and ftp_reachable is not True:
         print(f'[!] {name} has no reachable ports')
