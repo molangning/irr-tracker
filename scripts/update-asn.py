@@ -44,12 +44,12 @@ for i in dbs:
             if v4:
                 if origin not in ipv4.keys():
                     ipv4[origin] = set()
-                ipv4[origin].add(v4)
+                ipv4[origin].add(v4.lower())
 
             if v6:
                 if origin not in ipv6.keys():
                     ipv6[origin] = set()
-                ipv6[origin].add(v6)
+                ipv6[origin].add(v6.lower())
 
             buffer = []
             
