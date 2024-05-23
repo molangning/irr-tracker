@@ -8,6 +8,7 @@ import os
 import re
 import requests
 import socket
+import time
 
 GENERIC_HTML_SEARCH = re.compile(r'<a href="(.+?)(?<!\/)">.+?<\/a> +(.+?) (.+?) +([0-9]+)')
 FINAL_HTML_SEARCH = re.compile(r'<a href="(.+?)">.+?<\/a>.+?">(.+?) ([0-9:]+).*"> *(.*?) *<')
@@ -30,6 +31,7 @@ def wrapped_requests(url, headers={}, json=False):
                 exit(2)
     
             print("[!] Getting %s failed(%i/3)"%(url,i))
+            time.sleep(0.5)
 
         except requests.exceptions.Timeout:
             print("[!] Timed out getting %s (%i/3)"%(url,i))
