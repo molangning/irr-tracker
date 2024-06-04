@@ -30,9 +30,9 @@
         "irr_db_available": true
     },
     "CANARIE": {
-        "https_reachable": false,
+        "https_reachable": true,
         "ftp_reachable": false,
-        "irr_db_available": false
+        "irr_db_available": true
     },
     "IDNIC": {
         "https_reachable": false,
