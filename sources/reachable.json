@@ -1,6 +1,6 @@
 {
     "AFRINIC": {
-        "https_reachable": false,
+        "https_reachable": true,
         "ftp_reachable": true,
         "irr_db_available": true
     },
