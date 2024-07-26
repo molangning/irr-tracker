@@ -46,7 +46,7 @@
     },
     "LACNIC": {
         "https_reachable": true,
-        "ftp_reachable": true,
+        "ftp_reachable": null,
         "irr_db_available": true
     },
     "LEVEL3": {
