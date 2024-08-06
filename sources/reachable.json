@@ -30,9 +30,9 @@
         "irr_db_available": true
     },
     "CANARIE": {
-        "https_reachable": true,
+        "https_reachable": false,
         "ftp_reachable": false,
-        "irr_db_available": true
+        "irr_db_available": false
     },
     "IDNIC": {
         "https_reachable": false,
@@ -45,9 +45,9 @@
         "irr_db_available": true
     },
     "LACNIC": {
-        "https_reachable": true,
-        "ftp_reachable": true,
-        "irr_db_available": true
+        "https_reachable": false,
+        "ftp_reachable": false,
+        "irr_db_available": false
     },
     "LEVEL3": {
         "https_reachable": false,
