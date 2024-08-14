@@ -19,6 +19,6 @@ Tracks database updates from publicly available internet routing registries
 | NTTCOM | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | PANIX | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | RADB | :heavy_check_mark: | :x: | :heavy_check_mark: |
-| RIPE | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| RIPE | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | TC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 <!--- details anchor -->

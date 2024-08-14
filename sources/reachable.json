@@ -75,7 +75,7 @@
         "irr_db_available": true
     },
     "RIPE": {
-        "https_reachable": true,
+        "https_reachable": false,
         "ftp_reachable": true,
         "irr_db_available": true
     },
