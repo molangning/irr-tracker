@@ -20,5 +20,5 @@ Tracks database updates from publicly available internet routing registries
 | PANIX | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | RADB | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | RIPE | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| TC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| TC | :x: | :x: | :x: |
 <!--- details anchor -->
