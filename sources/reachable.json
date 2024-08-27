@@ -45,9 +45,9 @@
         "irr_db_available": true
     },
     "LACNIC": {
-        "https_reachable": false,
-        "ftp_reachable": false,
-        "irr_db_available": false
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
     },
     "LEVEL3": {
         "https_reachable": false,
@@ -60,9 +60,9 @@
         "irr_db_available": true
     },
     "NTTCOM": {
-        "https_reachable": false,
-        "ftp_reachable": false,
-        "irr_db_available": false
+        "https_reachable": true,
+        "ftp_reachable": true,
+        "irr_db_available": true
     },
     "PANIX": {
         "https_reachable": false,
