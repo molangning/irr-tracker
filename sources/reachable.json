@@ -6,8 +6,8 @@
     },
     "ALTDB": {
         "https_reachable": false,
-        "ftp_reachable": true,
-        "irr_db_available": true
+        "ftp_reachable": null,
+        "irr_db_available": null
     },
     "APNIC": {
         "https_reachable": true,
