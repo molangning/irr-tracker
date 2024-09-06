@@ -11,9 +11,9 @@ Tracks database updates from publicly available internet routing registries
 | BELL | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | BBOI | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | CANARIE | :x: | :heavy_check_mark: | :heavy_check_mark: |
-| IDNIC | :x: | :x: | :x: |
+| IDNIC | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | JPIRR | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| LACNIC | :x: | :x: | :x: |
+| LACNIC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | LEVEL3 | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NESTEGG | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NTTCOM | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
