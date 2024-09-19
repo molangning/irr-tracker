@@ -17,7 +17,7 @@ Tracks database updates from publicly available internet routing registries
 | LEVEL3 | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NESTEGG | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NTTCOM | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| PANIX | :x: | :x: | :x: |
+| PANIX | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | RADB | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | RIPE | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | TC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
