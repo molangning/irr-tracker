@@ -40,7 +40,7 @@
         "irr_db_available": true
     },
     "JPIRR": {
-        "https_reachable": false,
+        "https_reachable": true,
         "ftp_reachable": true,
         "irr_db_available": true
     },
