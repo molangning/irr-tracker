@@ -15,7 +15,7 @@ Tracks database updates from publicly available internet routing registries
 | JPIRR | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | LACNIC | :x: | :x: | :x: |
 | LEVEL3 | :heavy_check_mark: | :x: | :heavy_check_mark: |
-| NESTEGG | :x: | :x: | :x: |
+| NESTEGG | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NTTCOM | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | PANIX | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | RADB | :heavy_check_mark: | :x: | :heavy_check_mark: |
