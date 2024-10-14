@@ -10,9 +10,9 @@
         "irr_db_available": true
     },
     "APNIC": {
-        "https_reachable": true,
-        "ftp_reachable": true,
-        "irr_db_available": true
+        "https_reachable": false,
+        "ftp_reachable": false,
+        "irr_db_available": false
     },
     "ARIN": {
         "https_reachable": true,
