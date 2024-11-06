@@ -5,7 +5,7 @@ Tracks database updates from publicly available internet routing registries
 | Source | FTP available | HTTPS available | IRR DB available
 | --- | --- | --- | --- |
 | AFRINIC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| ALTDB | :heavy_check_mark: | :x: | :heavy_check_mark: |
+| ALTDB | :x: | :x: | :x: |
 | APNIC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | ARIN | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | BELL | :heavy_check_mark: | :x: | :heavy_check_mark: |
