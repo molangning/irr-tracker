@@ -5,7 +5,7 @@ Tracks database updates from publicly available internet routing registries
 | Source | FTP available | HTTPS available | IRR DB available
 | --- | --- | --- | --- |
 | AFRINIC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| ALTDB | :x: | :x: | :x: |
+| ALTDB | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | APNIC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | ARIN | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | BELL | :heavy_check_mark: | :x: | :heavy_check_mark: |
@@ -13,7 +13,7 @@ Tracks database updates from publicly available internet routing registries
 | CANARIE | :x: | :heavy_check_mark: | :heavy_check_mark: |
 | IDNIC | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | JPIRR | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| LACNIC | :x: | :x: | :x: |
+| LACNIC | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | LEVEL3 | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NESTEGG | :heavy_check_mark: | :x: | :heavy_check_mark: |
 | NTTCOM | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
