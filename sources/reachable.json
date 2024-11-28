@@ -21,8 +21,8 @@
     },
     "BELL": {
         "https_reachable": false,
-        "ftp_reachable": true,
-        "irr_db_available": true
+        "ftp_reachable": false,
+        "irr_db_available": false
     },
     "BBOI": {
         "https_reachable": false,
