@@ -81,7 +81,7 @@
     },
     "TC": {
         "https_reachable": true,
-        "ftp_reachable": true,
+        "ftp_reachable": false,
         "irr_db_available": true
     }
 }
