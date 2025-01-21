@@ -15,7 +15,7 @@
         "irr_db_available": true
     },
     "ARIN": {
-        "https_reachable": true,
+        "https_reachable": false,
         "ftp_reachable": true,
         "irr_db_available": true
     },
