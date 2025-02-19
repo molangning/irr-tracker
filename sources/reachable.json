@@ -36,8 +36,8 @@
     },
     "IDNIC": {
         "https_reachable": false,
-        "ftp_reachable": null,
-        "irr_db_available": null
+        "ftp_reachable": true,
+        "irr_db_available": true
     },
     "JPIRR": {
         "https_reachable": true,
